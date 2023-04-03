@@ -1,0 +1,55 @@
+Problem:    zad3
+Rows:       9
+Columns:    10
+Non-zeros:  36
+Status:     OPTIMAL
+Objective:  cost_func = 1345943601 (MINimum)
+
+   No.   Row name   St   Activity     Lower bound   Upper bound    Marginal
+------ ------------ -- ------------- ------------- ------------- -------------
+     1 cost_func    B    1.34594e+09                             
+     2 engine       NL        200000        200000                     2133.19 
+     3 home         NL        400000        400000                     1414.32 
+     4 heavy        NL        250000        250000                     1414.32 
+     5 b1_oil       NS             0            -0             =      -1414.32 
+     6 b2_oil       NS             0            -0             =      -1414.32 
+     7 b1_distill   NS             0            -0             =      -1414.32 
+     8 b2_distill   NS             0            -0             =      -1414.32 
+     9 limit        B       -1181.56                          -0 
+
+   No. Column name  St   Activity     Lower bound   Upper bound    Marginal
+------ ------------ -- ------------- ------------- ------------- -------------
+     1 b1           B    1.02603e+06             0               
+     2 b1_home      B         381562             0               
+     3 b1_heavy     B        28850.3             0               
+     4 b1_distill_crack
+                    B        92190.9             0               
+     5 b1_distill_heavy
+                    B        61713.7             0               
+     6 b2           NL             0             0                     235.944 
+     7 b2_home      NL             0             0                       < eps
+     8 b2_heavy     B              0             0               
+     9 b2_distill_crack
+                    B              0             0               
+    10 b2_distill_heavy
+                    NL             0             0                       < eps
+
+Karush-Kuhn-Tucker optimality conditions:
+
+KKT.PE: max.abs.err = 2.91e-11 on row 4
+        max.rel.err = 5.82e-17 on row 4
+        High quality
+
+KKT.PB: max.abs.err = 0.00e+00 on row 0
+        max.rel.err = 0.00e+00 on row 0
+        High quality
+
+KKT.DE: max.abs.err = 4.55e-13 on column 1
+        max.rel.err = 1.74e-16 on column 1
+        High quality
+
+KKT.DB: max.abs.err = 6.82e-13 on column 7
+        max.rel.err = 6.82e-13 on column 7
+        High quality
+
+End of output

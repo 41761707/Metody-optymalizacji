@@ -1,0 +1,37 @@
+data;
+
+#Zbiór miast rozpatrywanych w ramach zadania
+set Cities := 'Opole' 'Brzeg' 'Nysa' 'Prudnik' 'Strzelce Opolskie' 'Kozle' 'Raciborz';
+
+#zbiór zawierający typy dźwigów
+set Cranes := 'Typ_1' 'Typ_2';
+
+#Odległości między miastami pobrane z Google Maps
+param distance:             'Opole'  'Brzeg'  'Nysa'  'Prudnik'  'Strzelce Opolskie'  'Kozle'  'Raciborz' :=
+    'Opole'                 0      43    58     65        34      53       78
+    'Brzeg'                 43      0     53     80        78      99       126
+    'Nysa'                  58      53    0      33        86      75       89
+    'Prudnik'               65      80    33     0         69      48       62
+    'Strzelce Opolskie'     34      78    86     69        0       26       61
+    'Kozle'                 53      99    75     48        26      0        36
+    'Raciborz'              78      126   89     62        61      36       0;
+
+#Liczba nadmiarowych dźwigów
+param excess : 'Opole' 'Brzeg' 'Nysa' 'Prudnik' 'Strzelce Opolskie' 'Kozle' 'Raciborz' :=
+    'Typ_1'     7       0       6       0       5                   0       0 
+    'Typ_2'     0       1       2       10      0                   0       0;
+
+#Liczba brakujących dźwigów
+param deficiency : 'Opole' 'Brzeg' 'Nysa' 'Prudnik' 'Strzelce Opolskie' 'Kozle' 'Raciborz' :=
+    'Typ_1'         0       10      0      4        0                   8       0
+    'Typ_2'         2       0       0      0        4                   2       1;
+
+#Koszt transportu
+param transport_cost :=
+    'Typ_1'  1.0
+    'Typ_2'  1.2;
+
+#Typ 1 moze być zastąpiony typem 2
+param could_replace := 'Typ_2';
+
+end;

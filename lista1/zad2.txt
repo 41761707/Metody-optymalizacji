@@ -1,0 +1,281 @@
+Problem:    zad2
+Rows:       29
+Columns:    98
+Non-zeros:  329
+Status:     OPTIMAL
+Objective:  cost_func = 1419 (MINimum)
+
+   No.   Row name   St   Activity     Lower bound   Upper bound    Marginal
+------ ------------ -- ------------- ------------- ------------- -------------
+     1 cost_func    B           1419                             
+     2 move_all_excessive[Opole,Typ_1]
+                    NS             7             7             =            78 
+     3 move_all_excessive[Opole,Typ_2]
+                    B              0            -0             = 
+     4 move_all_excessive[Brzeg,Typ_1]
+                    B              0            -0             = 
+     5 move_all_excessive[Brzeg,Typ_2]
+                    NS             1             1             =            35 
+     6 move_all_excessive[Nysa,Typ_1]
+                    NS             6             6             =            88 
+     7 move_all_excessive[Nysa,Typ_2]
+                    NS             2             2             =          75.4 
+     8 move_all_excessive[Prudnik,Typ_1]
+                    B              0            -0             = 
+     9 move_all_excessive[Prudnik,Typ_2]
+                    NS            10            10             =            55 
+    10 move_all_excessive['Strzelce Opolskie',Typ_1]
+                    NS             5             5             =            51 
+    11 move_all_excessive['Strzelce Opolskie',Typ_2]
+                    NS             0            -0             =         -27.8 
+    12 move_all_excessive[Kozle,Typ_1]
+                    B              0            -0             = 
+    13 move_all_excessive[Kozle,Typ_2]
+                    NS             0            -0             =          -2.6 
+    14 move_all_excessive[Raciborz,Typ_1]
+                    B              0            -0             = 
+    15 move_all_excessive[Raciborz,Typ_2]
+                    NS             0            -0             =         -19.4 
+    16 move_replacable[Opole]
+                    NL             2             2                        72.2 
+    17 move_replacable[Brzeg]
+                    B              1            -0               
+    18 move_replacable[Nysa]
+                    B              0            -0               
+    19 move_replacable[Prudnik]
+                    B              3            -0               
+    20 move_replacable['Strzelce Opolskie']
+                    NL             4             4                        78.8 
+    21 move_replacable[Kozle]
+                    NL             2             2                        27.6 
+    22 move_replacable[Raciborz]
+                    NL             1             1                        19.4 
+    23 sent[Opole]  NS             2             2             =           -78 
+    24 sent[Brzeg]  NS            10            10             =           -35 
+    25 sent[Nysa]   NS             0            -0             =           -88 
+    26 sent[Prudnik]
+                    NS             4             4             =           -55 
+    27 sent['Strzelce Opolskie']
+                    NS             4             4             =           -51 
+    28 sent[Kozle]  NS            10            10             =           -25 
+    29 sent[Raciborz]
+                    B              1             1             = 
+
+   No. Column name  St   Activity     Lower bound   Upper bound    Marginal
+------ ------------ -- ------------- ------------- ------------- -------------
+     1 solution[Opole,Opole,Typ_1]
+                    B              0             0               
+     2 solution[Opole,Brzeg,Typ_1]
+                    B              4             0               
+     3 solution[Opole,Nysa,Typ_1]
+                    NL             0             0                          68 
+     4 solution[Opole,Prudnik,Typ_1]
+                    NL             0             0                          42 
+     5 solution[Opole,'Strzelce Opolskie',Typ_1]
+                    NL             0             0                           7 
+     6 solution[Opole,Kozle,Typ_1]
+                    B              3             0               
+     7 solution[Opole,Raciborz,Typ_1]
+                    B              0             0               
+     8 solution[Brzeg,Opole,Typ_1]
+                    NL             0             0                         121 
+     9 solution[Brzeg,Brzeg,Typ_1]
+                    NL             0             0                          35 
+    10 solution[Brzeg,Nysa,Typ_1]
+                    NL             0             0                         141 
+    11 solution[Brzeg,Prudnik,Typ_1]
+                    NL             0             0                         135 
+    12 solution[Brzeg,'Strzelce Opolskie',Typ_1]
+                    NL             0             0                         129 
+    13 solution[Brzeg,Kozle,Typ_1]
+                    NL             0             0                         124 
+    14 solution[Brzeg,Raciborz,Typ_1]
+                    NL             0             0                         126 
+    15 solution[Nysa,Opole,Typ_1]
+                    NL             0             0                          48 
+    16 solution[Nysa,Brzeg,Typ_1]
+                    B              5             0               
+    17 solution[Nysa,Nysa,Typ_1]
+                    B              0             0               
+    18 solution[Nysa,Prudnik,Typ_1]
+                    B              1             0               
+    19 solution[Nysa,'Strzelce Opolskie',Typ_1]
+                    NL             0             0                          49 
+    20 solution[Nysa,Kozle,Typ_1]
+                    NL             0             0                          12 
+    21 solution[Nysa,Raciborz,Typ_1]
+                    NL             0             0                           1 
+    22 solution[Prudnik,Opole,Typ_1]
+                    NL             0             0                         143 
+    23 solution[Prudnik,Brzeg,Typ_1]
+                    NL             0             0                         115 
+    24 solution[Prudnik,Nysa,Typ_1]
+                    NL             0             0                         121 
+    25 solution[Prudnik,Prudnik,Typ_1]
+                    NL             0             0                          55 
+    26 solution[Prudnik,'Strzelce Opolskie',Typ_1]
+                    NL             0             0                         120 
+    27 solution[Prudnik,Kozle,Typ_1]
+                    NL             0             0                          73 
+    28 solution[Prudnik,Raciborz,Typ_1]
+                    NL             0             0                          62 
+    29 solution['Strzelce Opolskie',Opole,Typ_1]
+                    NL             0             0                          61 
+    30 solution['Strzelce Opolskie',Brzeg,Typ_1]
+                    NL             0             0                          62 
+    31 solution['Strzelce Opolskie',Nysa,Typ_1]
+                    NL             0             0                         123 
+    32 solution['Strzelce Opolskie',Prudnik,Typ_1]
+                    NL             0             0                          73 
+    33 solution['Strzelce Opolskie','Strzelce Opolskie',Typ_1]
+                    B              0             0               
+    34 solution['Strzelce Opolskie',Kozle,Typ_1]
+                    B              5             0               
+    35 solution['Strzelce Opolskie',Raciborz,Typ_1]
+                    NL             0             0                          10 
+    36 solution[Kozle,Opole,Typ_1]
+                    NL             0             0                         131 
+    37 solution[Kozle,Brzeg,Typ_1]
+                    NL             0             0                         134 
+    38 solution[Kozle,Nysa,Typ_1]
+                    NL             0             0                         163 
+    39 solution[Kozle,Prudnik,Typ_1]
+                    NL             0             0                         103 
+    40 solution[Kozle,'Strzelce Opolskie',Typ_1]
+                    NL             0             0                          77 
+    41 solution[Kozle,Kozle,Typ_1]
+                    NL             0             0                          25 
+    42 solution[Kozle,Raciborz,Typ_1]
+                    NL             0             0                          36 
+    43 solution[Raciborz,Opole,Typ_1]
+                    NL             0             0                         156 
+    44 solution[Raciborz,Brzeg,Typ_1]
+                    NL             0             0                         161 
+    45 solution[Raciborz,Nysa,Typ_1]
+                    NL             0             0                         177 
+    46 solution[Raciborz,Prudnik,Typ_1]
+                    NL             0             0                         117 
+    47 solution[Raciborz,'Strzelce Opolskie',Typ_1]
+                    NL             0             0                         112 
+    48 solution[Raciborz,Kozle,Typ_1]
+                    NL             0             0                          61 
+    49 solution[Raciborz,Raciborz,Typ_1]
+                    NL             0             0                       < eps
+    50 solution[Opole,Opole,Typ_2]
+                    NL             0             0                         5.8 
+    51 solution[Opole,Brzeg,Typ_2]
+                    NL             0             0                        86.6 
+    52 solution[Opole,Nysa,Typ_2]
+                    NL             0             0                       157.6 
+    53 solution[Opole,Prudnik,Typ_2]
+                    NL             0             0                         133 
+    54 solution[Opole,'Strzelce Opolskie',Typ_2]
+                    NL             0             0                          13 
+    55 solution[Opole,Kozle,Typ_2]
+                    NL             0             0                          61 
+    56 solution[Opole,Raciborz,Typ_2]
+                    NL             0             0                        74.2 
+    57 solution[Brzeg,Opole,Typ_2]
+                    NL             0             0                        22.4 
+    58 solution[Brzeg,Brzeg,Typ_2]
+                    B              1             0               
+    59 solution[Brzeg,Nysa,Typ_2]
+                    NL             0             0                       116.6 
+    60 solution[Brzeg,Prudnik,Typ_2]
+                    NL             0             0                         116 
+    61 solution[Brzeg,'Strzelce Opolskie',Typ_2]
+                    NL             0             0                        30.8 
+    62 solution[Brzeg,Kozle,Typ_2]
+                    NL             0             0                        81.2 
+    63 solution[Brzeg,Raciborz,Typ_2]
+                    NL             0             0                        96.8 
+    64 solution[Nysa,Opole,Typ_2]
+                    B              2             0               
+    65 solution[Nysa,Brzeg,Typ_2]
+                    NL             0             0                        23.2 
+    66 solution[Nysa,Nysa,Typ_2]
+                    NL             0             0                        12.6 
+    67 solution[Nysa,Prudnik,Typ_2]
+                    NL             0             0                        19.2 
+    68 solution[Nysa,'Strzelce Opolskie',Typ_2]
+                    B              0             0               
+    69 solution[Nysa,Kozle,Typ_2]
+                    NL             0             0                          12 
+    70 solution[Nysa,Raciborz,Typ_2]
+                    NL             0             0                          12 
+    71 solution[Prudnik,Opole,Typ_2]
+                    NL             0             0                        28.8 
+    72 solution[Prudnik,Brzeg,Typ_2]
+                    NL             0             0                          76 
+    73 solution[Prudnik,Nysa,Typ_2]
+                    NL             0             0                        72.6 
+    74 solution[Prudnik,Prudnik,Typ_2]
+                    B              3             0               
+    75 solution[Prudnik,'Strzelce Opolskie',Typ_2]
+                    B              4             0               
+    76 solution[Prudnik,Kozle,Typ_2]
+                    B              2             0               
+    77 solution[Prudnik,Raciborz,Typ_2]
+                    B              1             0               
+    78 solution['Strzelce Opolskie',Opole,Typ_2]
+                    NL             0             0                        74.4 
+    79 solution['Strzelce Opolskie',Brzeg,Typ_2]
+                    NL             0             0                       156.4 
+    80 solution['Strzelce Opolskie',Nysa,Typ_2]
+                    NL             0             0                         219 
+    81 solution['Strzelce Opolskie',Prudnik,Typ_2]
+                    NL             0             0                       165.6 
+    82 solution['Strzelce Opolskie','Strzelce Opolskie',Typ_2]
+                    B              0             0               
+    83 solution['Strzelce Opolskie',Kozle,Typ_2]
+                    NL             0             0                        56.4 
+    84 solution['Strzelce Opolskie',Raciborz,Typ_2]
+                    NL             0             0                        81.6 
+    85 solution[Kozle,Opole,Typ_2]
+                    NL             0             0                          72 
+    86 solution[Kozle,Brzeg,Typ_2]
+                    NL             0             0                       156.4 
+    87 solution[Kozle,Nysa,Typ_2]
+                    NL             0             0                       180.6 
+    88 solution[Kozle,Prudnik,Typ_2]
+                    NL             0             0                       115.2 
+    89 solution[Kozle,'Strzelce Opolskie',Typ_2]
+                    NL             0             0                           6 
+    90 solution[Kozle,Kozle,Typ_2]
+                    B              0             0               
+    91 solution[Kozle,Raciborz,Typ_2]
+                    NL             0             0                        26.4 
+    92 solution[Raciborz,Opole,Typ_2]
+                    NL             0             0                       118.8 
+    93 solution[Raciborz,Brzeg,Typ_2]
+                    NL             0             0                       205.6 
+    94 solution[Raciborz,Nysa,Typ_2]
+                    NL             0             0                       214.2 
+    95 solution[Raciborz,Prudnik,Typ_2]
+                    NL             0             0                       148.8 
+    96 solution[Raciborz,'Strzelce Opolskie',Typ_2]
+                    NL             0             0                        64.8 
+    97 solution[Raciborz,Kozle,Typ_2]
+                    NL             0             0                          60 
+    98 solution[Raciborz,Raciborz,Typ_2]
+                    B              0             0               
+
+Karush-Kuhn-Tucker optimality conditions:
+
+KKT.PE: max.abs.err = 0.00e+00 on row 0
+        max.rel.err = 0.00e+00 on row 0
+        High quality
+
+KKT.PB: max.abs.err = 0.00e+00 on row 0
+        max.rel.err = 0.00e+00 on row 0
+        High quality
+
+KKT.DE: max.abs.err = 2.84e-14 on column 64
+        max.rel.err = 1.86e-16 on column 86
+        High quality
+
+KKT.DB: max.abs.err = 0.00e+00 on row 0
+        max.rel.err = 0.00e+00 on row 0
+        High quality
+
+End of output

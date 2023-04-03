@@ -1,0 +1,284 @@
+\documentclass[a4paper,14pt]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{titlesec}
+\usepackage{float}
+
+\renewcommand{\contentsname}{Spis treści}
+
+\titleformat{\chapter}[display]
+  {\normalfont\bfseries}{}{0pt}{\Huge}
+
+\title{Metody optymalizacji Lista 1}
+\author{Radosław Wojtczak, numer indeksu: 254607}
+\date{02.04.2023}
+\begin{document}
+\maketitle
+\tableofcontents
+\chapter{Zadanie 1}
+\section{Wprowadzenie}
+    Pierwszym zadaniem było przeprowadzenie testów na dokładność oraz odporność
+    algorytmów LP z użyciem specjalnie spreparowanego przykładu wykorzystującego
+    macierz Hilberta.
+    Ze względu na swoją budowę, macierz ta
+    powoduje złe uwarunkowanie zadania, nawet dla niewielkich wartości parametru
+    $n$, który oznacza rozmiar problemu.
+\section{Model}
+    \subsection{Zmienne decyzyjne}
+        \begin{equation}
+            x \geq 0
+        \end{equation}
+        Co oznacza, iż każdy z elementów wektora nie może być liczbą ujemną.
+    \subsection{Ograniczenia}
+        \begin{equation}
+            A \boldmath x = b
+        \end{equation}
+        Dla elementów macierzy zdefiniowanych w następujący sposób.
+        \begin{equation}
+            a_{i,j} = \frac{1}{i+j-1}, i,j=1,..,n \\
+        \end{equation}
+        \begin{equation}
+            c_{i} = b_{i} =\sum_{j=1}^{n} \frac{1}{i+j-1}, i,j=1,..,n
+        \end{equation}
+    \subsection{Funkcja celu}
+        \begin{equation}
+            min \: \boldmath c^{T}x
+        \end{equation}
+\section{Wyniki}
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{|c | c |} 
+        \hline
+        n & $\frac{|| x - \hat x||_{2}}{|| x ||_{2}}$\\
+        \hline
+        3 & 0.000000\\
+        4 & 0.000000\\
+        5 & 0.000000\\
+        6 & 0.000000\\
+        7 & 0.000000\\
+        8 & 0.514059\\
+        9 & 0.682911\\
+        10 & 0.990388\\
+        11 & 0.952197\\
+        12 & 1.292507\\
+        \hline
+        \end{tabular}
+        \caption{Wartości błędów względnych dla wskazanych wartości parametru n}
+    \end{table}
+    Zauważamy, iż ostatni rozmiar problemu, dla którego można rozwiązać zadanie 
+    z dokładnością do co najmniej 2 cyfr jest równy \textbf{7}. Od tej wartości błąd względny jest niezerowy,
+    ponadto dla rosnący wartości parametru n, zwiększa się również błąd, co wskazuje na to, iż 
+    im większy rozmiar problemu tym większa niedokładność w otrzymanych wynikach.
+    Wiedząc, iż rozwiązaniem rozpatrywanego równania jest wektor \textbf{x}, gdzie $x_{i} = 1, i=1,...,n$ poniżej 
+    zaprezentowano wyniki otrzymane dla dwóch wybranych rozmiarów problemów:
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{|c | c | c |} 
+        \hline
+        Indeks & n=7 & n=8\\
+        \hline
+        x[0] & 1 & 1.00006\\
+        x[1] & 1 & 0.996503\\
+        x[2] & 1 & 1.04662 \\
+        x[3] & 1 & 0.74359 \\
+        x[4] & 1 & 1.6993\\
+        x[5] & 1 &  0\\
+        x[6] & 1 & 1.71795\\
+        x[7] & --- &  0.795918\\
+        \hline
+        \end{tabular}
+        \caption{Współrzędne wektorów dla wybranych rozmiarów problemu}
+    \end{table}
+\section{Wnioski}
+    Realizując problemy przy użyciu narzędzi programowania liniowego należy zwrócić uwagę na uwarunkowanie zadania, gdyż
+    ma ono znaczny wpływ na otrzymywane wyniki. Im zadanie jest gorzej uwarunkowane tym otrzymane wyniki odbiegają bardziej 
+    od wartości rzeczywistych.
+
+\chapter{Zadanie 2}
+\section{Wprowadzenie}
+    Pewna firma transportowa miała problem z poprawnym rozdysponowaniem 
+    dźwigów samojezdnych w swoich 7 siedzibach umiejscowionych w 
+    południowo-zachodniej części Polski. W ramach zadania dana była 
+    tabela prezentująca nadmiar jak i niedobór dźwigów samojezdnych,
+    występujących w dwóch typach, w każdej z placówek firmy
+    Przy pomocy narzędzia Google Maps ustalono odległości między placówkami firmy,
+    które zostały zaprezentowane w poniższej tabeli:
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{|c | c | c | c | c | c | c | c |} 
+        \hline
+         & Opole & Brzeg & Nysa & Prudnik & Strzelce & Koźle & Racibórz \\
+        \hline
+        Opole & 0 & 43 & 58 & 65 & 34 & 53 & 78 \\
+        Brzeg & 43 & 0 & 53 & 80 & 78 & 99 & 126 \\
+        Nysa & 58 & 53 & 0 & 33 & 86 & 75 & 89 \\
+        Prudnik & 65 & 80 & 33 & 0 & 69 & 48 & 62 \\
+        Strzelce & 34 & 78 & 86 & 69 & 0 & 26 & 61 \\
+        Koźle & 53 & 99 & 75 & 48 & 26 & 0 & 36 \\
+        Racibórz & 78 & 126 & 89 & 62 & 61 & 36 & 0 \\
+        \hline
+        \end{tabular}
+        \caption{Odległości między siedzibami firmy}
+    \end{table}
+    Ze względu estetycznych nazwa miejscowości \textit{Strzelce Opolskie} w tabeli, jak i w dalszej 
+    części sprawozdania została zredukowana do \textit{Strzelce}.
+    Ponadto koszt przeniesienia dźwigów z miasta A do miasta B jest zależne od 
+    jego typu. Koszt transportu dźwigu typu II jest o $20\%$ wyższy, niż koszt 
+    transportu dźwigu I. Ponadto dźwig typu I może zostać zastąpiony dźwigiem typu II,
+    jednakże konwersja jest jedynie jednostronna.
+    Celem zadania jest wyznaczenie planu, zgodnie z którym firma powinna dokonać 
+    przemieszczania dźwigów między swoimi siedzibami, aby potrzeby każdej z placówek 
+    były zaspokojone, przy minimalnym koszcie transportu.
+
+\section{Model}
+    W skład modelu wchodzą następujące elementy:
+    \begin{itemize}
+        \item Zbiór miast, określany mianem \textbf{Cities}, który zawiera
+        wszystkie miasta, w których rozpatrywana firma posiada swoją placówkę
+        \item Zbiór typów dźwigów, określany mianem \textbf{Cranes}
+    \end{itemize}
+    Ponadto zdefiniowano następujące parametry:
+    \begin{itemize}
+        \item Parametr $excess(crane \in Cranes, city \in Cities)$, która definiuje nadmiar dźwigów dla wskazanego miasta
+        \item Parametr $deficiency(crane \in Cranes, city \in Cities)$, która definiuje niedobór dźwigów dla wskazanego miasta
+        \item Parametr $transport\_cost(crane \in Cranes)$ definiujący koszt transportu dźwigów o wskazanym typie
+        \item Parametr $could-replace(crane \in Cranes)$ wskazujący, który z dźwigów może zostać zastąpiony przez dźwig innego typu
+    \end{itemize}
+
+    \subsection{Zmienne decyzyjne}
+        Zmienną decyzyjną we wskazanym modelu jest liczba dźwigów, którą należy przetransportować z miasta \textbf{c1} do miasta \textbf{c2}
+        \begin{equation}
+            x_{c1,c2,crane} c1,c2 \in Cities, crane \in Cranes
+        \end{equation}
+    \subsection{Ograniczenia}
+        W ramach zadania podane zostały następujące ograniczenia:
+        \begin{itemize}
+            \item Liczba dźwigów, która została przetransportowana do wskazanego miasta 
+            powinna być równa niedoborowi, który wskazane miasto posiadało.
+            \begin{equation}
+                ( \forall c1 \in Cities) (\sum_{c2 \in Cities, c \in Cranes} x_{c1,c2,c} = deficiency(c,c1))
+            \end{equation}
+            \item Dźwig typu II nie może zostać zastąpiony przez dźwig typu I
+            \begin{equation}
+                ( \forall c1 \in Cities) ( x_{c1,c2,c_{II}} \geq deficiency(c_{II},c1))
+            \end{equation}
+            \item Liczba nadmiarowych dźwigów musi zostać zniwelowana dla każdego z miast
+            \begin{equation}
+                ( \forall c1 \in Cities, c \in Cranes) (\sum_{c2 \in Cities} x_{c1,c2,c} = excess(c,c1))
+            \end{equation}
+        \end{itemize}
+    \subsection{Funkcja celu}
+        Celem tego zadania było zminimalizowanie funkcji celu:
+        \begin{equation}
+         min :\ \sum_{c1,c2 \in Cities, c \in Cranes} distance(c1,c2) * x_{c1,c2,crane}  * transport\_cost(crane) 
+        \end{equation}
+        Wynika to z faktu, iż firma chce zapłacić jak najmniej za transport dźwigów, który zgodnie z powyższym opisem zadanej sytuacji jest zależny od dystansu, 
+        który musi zostać pokonany.
+\section{Wyniki}
+    Uruchomienie programu, który implementuje wskazaną sytuację, skutkuje otrzymaniem następującego planu transportu dźwigów:
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{|c | c | c | c |} 
+        \hline
+        Z & Do & Liczba & Typ\\
+        \hline
+        Opole & Brzeg & 4 & I \\
+        Opole & Koźle & 3 & I \\
+        Brzeg & Brzeg & 1 & II \\
+        Nysa & Opole & 2 & II \\
+        Nysa & Brzeg & 5 & I \\
+        Nysa & Prudnik & 1 & I \\
+        Prudnik & Prudnik & 3 & II \\
+        Prudnik & Strzelce & 4 & II \\
+        Prudnik & Koźle & 2 & II \\
+        Prudnik & Racibórz & 1 & II \\
+        Strzelce & Koźle & 5 & I \\
+        \hline
+        \end{tabular}
+        \caption{Wykreowany plan transportu dźwigów między placówkami firmy}
+    \end{table}
+    Sytuacja występująca chociażbym w trzecim wierszu planu wskazuje na sytuację, w której doszło do zamiany typów dźwigu (gdyż zgodnie z założeniami, dźwig typu I mógł 
+    zostać zastąpiony przez dźwig typu II)
+    Wartość funkcji celu wyniosła: \textbf{1419}
+    Ponadto, założenie całkowitoliczbowości zmiennych decyzyjnych okazało się być \textbf{niepotrzebne} w tym zadaniu.
+    Pomijając wskazane ograniczenie program zwrócił ten sam plan z tą samą wartością funkcji celu.
+\section{Wnioski}
+    Programowanie liniowe jest użytecznym narzędziem rozwiązującym w skuteczny sposób problemy natury rzeczywistej.
+\chapter{Zadanie 3}
+\section{Wprowadzenie}
+    W ramach zadania rozpatrzono pewną rafinerię, która dysponuje jednostką destylującą, która pozwala 
+    otrzymać cztery rodzaje produktów: paliwa silnikowe, oleje, destylaty ciężkie oraz resztki. Ponadto 
+    posiada jednostkę reformowania oraz jednostkę krakowania katalitycznego, która może przetwarzać destylaty ciężkie.
+    W ramach zadania należało zminimalizować koszt produkcji wskazanej rafinierii, która posiada do dyspozycji 
+    dwa typy ropy, ropę \textbf{B1} oraz robię \textbf{B2}. Wydajności procesów, oraz koszty operacji były dane 
+    w ramach treści zadania.
+\section{Model}
+    W skład modelu wchodzą następujące elementy:
+    \begin{itemize}
+        \item Zbiór typów ropy o nazwie \textbf{Oils}, w skład którego wchodzą dwa wyżej wymienione typy: $\{B1,B2\}$
+        \item Zbiór elementów otrzymanych w ramach destylacji o nazwie \textbf{Types}, w skład którego wchodzą: $\{Petrol,Oil,Distill,Leftovers\}$
+    \end{itemize}
+    \subsection{Zmienne decyzyjne}
+        W ramach modeulu rozpatrujemy następujące zmienne decyzyjne
+        \begin{itemize}
+            \item b1 - Liczba ton ropy B1, która została przetworzona przez rafinerię
+            \item b1\_ho - Liczba ton oleju z ropy B1, która została przeznaczona na domowe paliwa
+            \item b1\_he - Liczba ton oleju z ropy B1, która została przeznaczona na ciężkie paliwa
+            \item b1\_d\_c - Liczba ton destylatu z ropy B1, która została przeznaczona na krakowanie
+            \item b1\_d\_h - Liczba ton destylatu z ropy B1, która został preznaczony na ciężkie paliwa
+            \item b2 - Liczba ton ropy B2, która została przetworzona przez rafinerię
+            \item b2\_ho - Liczba ton oleju z ropy B2, która została przeznaczona na domowe paliwa
+            \item b2\_he -  Liczba ton oleju z ropy B2, która została przeznaczona na ciężkie paliwa
+            \item b2\_d\_c - Liczba ton destylatu z ropy B2, która została przeznaczona na krakowanie
+            \item b2\_d\_h - Liczba ton destylatu z ropy B2, która został preznaczony na ciężkie paliwa
+        \end{itemize}
+    \subsection{Ograniczenia}
+        Treść zadania determinowała następujące ograniczenia:
+        \begin{itemize}
+            \item Ograniczenie dotyczące liczby wyprodukowanego paliwa silnikowego
+            \begin{equation}
+                b1_{petrol} * b1 + b2_{petrol} * b2 + 0.5 * d\_c + 0.5 * d\_h \geq  200000 
+            \end{equation}
+            \item Ograniczenie dotyczące liczby wyprodukowanego domowego paliwa
+            \begin{equation}
+                b1\_ho + b2\_ho + 0.2 * b1\_d\_c + 0.2 * b2\_d\_c \geq 400000
+            \end{equation}
+            \item Ograniczenie dotyczące liczby wyprodukowanego ciężkiego paliwa
+            \begin{equation}
+                b1\_he + b1\_d\_h + b1_{d} * b1 + b2\_he + b2\_d\_h + b2_{d} * b2 + 0.06 * b1\_d\_c + 0.06 * b2\_d\_c \geq 250000
+            \end{equation}
+            \item Ograniczenia dotyczące zawartości siarki \\
+            $0.002 * b1\_ho + 0.003 * b1\_d\_c * 0.2 + 0.012 * b2\_ho + 0.025 * b2\_d\_c * 0.2 \leq (b1\_ho + b2\_ho + b1\_d\_c * 0.2 + b2\_d\_c * 0.2) * 0.005$
+            \item Ograniczenie odnośnie ilości oleju
+            \begin{equation}
+                b1\_ho + b1\_he = b1_{oil} * b1
+            \end{equation}
+            \begin{equation}
+                b2\_ho + b2\_he = b2_{oil} * b2
+            \end{equation}
+            \item Ograniczenie odnośnie ilości destylatu
+            \begin{equation}
+                b1\_d\_c + b1\_d\_h = b1_{d} * b1
+            \end{equation}
+            \begin{equation}
+                b2\_d\_c + b2\_d\_h = b2_{d} * b2
+            \end{equation}
+        \end{itemize}
+        Ze względów estetycznych nie wykorzystano zmiennych aby zaprezentować przeliczniki ustalone w ramach zadnia, 
+        zostały one wprost zaaplikowane do równań.
+    \subsection{Funkcja celu}
+        Funkcja celu prezentuje się następująco:
+        \begin{equation}
+            min :\ (1300+10) * b1 + (1500+10) * b2 + 20 * b1\_d\_c + 20 * b2\_d\_c
+        \end{equation}
+        Co sprowadza się do minimalizacji kosztów przetwarzania ropy
+\section{Wyniki}
+        Program po uruchomieniu wygenerował wartość funkcji kosztu równą: \textbf{1345943600.86768}.
+        W ramach operacji wykonywanych w rafinerii wykorzystano \textbf{1026030.36876356} ton ropy B1 i 
+        0 ton ropy B2. Ostatecznie otrzymano \textbf{381562} ton oleju wykorzystanego na domowe paliwa, 
+        \textbf{28850.3} ton oleju wykorzystanego na ciężkie paliwa. Ponadto przeznaczono \textbf{61713.7} ton 
+        destlatu na ciężkie paliwa oraz \textbf{92190.9} ton na krakowanie katalityczne.
+\section{Wnioski}
+        Powyższy test jest kolejny praktyczny przykładem zastosowania programowania liniowego 
+        w rozwiązywaniu skomplikowanych, rzeczywistych problemów.
+\end{document}

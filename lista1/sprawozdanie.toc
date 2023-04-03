@@ -1,0 +1,24 @@
+\contentsline {chapter}{\numberline {1}Zadanie 1}{2}%
+\contentsline {section}{\numberline {1.1}Wprowadzenie}{2}%
+\contentsline {section}{\numberline {1.2}Model}{2}%
+\contentsline {subsection}{\numberline {1.2.1}Zmienne decyzyjne}{2}%
+\contentsline {subsection}{\numberline {1.2.2}Ograniczenia}{2}%
+\contentsline {subsection}{\numberline {1.2.3}Funkcja celu}{2}%
+\contentsline {section}{\numberline {1.3}Wyniki}{3}%
+\contentsline {section}{\numberline {1.4}Wnioski}{3}%
+\contentsline {chapter}{\numberline {2}Zadanie 2}{4}%
+\contentsline {section}{\numberline {2.1}Wprowadzenie}{4}%
+\contentsline {section}{\numberline {2.2}Model}{4}%
+\contentsline {subsection}{\numberline {2.2.1}Zmienne decyzyjne}{5}%
+\contentsline {subsection}{\numberline {2.2.2}Ograniczenia}{5}%
+\contentsline {subsection}{\numberline {2.2.3}Funkcja celu}{5}%
+\contentsline {section}{\numberline {2.3}Wyniki}{6}%
+\contentsline {section}{\numberline {2.4}Wnioski}{6}%
+\contentsline {chapter}{\numberline {3}Zadanie 3}{7}%
+\contentsline {section}{\numberline {3.1}Wprowadzenie}{7}%
+\contentsline {section}{\numberline {3.2}Model}{7}%
+\contentsline {subsection}{\numberline {3.2.1}Zmienne decyzyjne}{7}%
+\contentsline {subsection}{\numberline {3.2.2}Ograniczenia}{8}%
+\contentsline {subsection}{\numberline {3.2.3}Funkcja celu}{8}%
+\contentsline {section}{\numberline {3.3}Wyniki}{9}%
+\contentsline {section}{\numberline {3.4}Wnioski}{9}%
