@@ -1,0 +1,166 @@
+\documentclass[a4paper,14pt]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{titlesec}
+\usepackage{float}
+
+\renewcommand{\contentsname}{Spis treści}
+
+\titleformat{\chapter}[display]
+  {\normalfont\bfseries}{}{0pt}{\Huge}
+
+\title{Metody optymalizacji Lista 2}
+\author{Radosław Wojtczak, numer indeksu: 254607}
+\date{07.05.2023}
+\begin{document}
+\maketitle
+\tableofcontents
+\chapter{Zadanie 1}
+\section{Wprowadzenie}
+    Treść zadania: \\
+    Tartak produkuje deski o standardowej szerokości 22 cali (każda deska ma ustaloną długość). Klienci firmy zamawiają jednak deski o mniejszej szerokości (i o tej samej długości,
+jak deski o standardowej szerokości). Aktualne zamówienia opiewają na 110 desek o szerokości 7 cali, 120 desek o szerokości 5 cali i 80 desek o szerokości 3 cali. Deski o mniejszej
+szerokości są odcinane z desek o standardowej szerokości. Na przykład firma może podjąć
+decyzję o przecięciu dużej deski na dwie deski po 7 cali i jedną deskę o szerokości 5 cali.
+W tym przypadku z deski standardowej tracona jest listwa o szerokości 3 cali. Firma chce
+wykonać zamówienie w ten sposób, aby zminimalizować ilość odpadów
+\section{Model}
+    
+\section{Wyniki} 
+
+\chapter{Zadanie 2}
+\section{Wprowadzenie}
+    Celem zadania jest znalezienie odpowiedniego harmonogramu, według którego należy 
+    wykonać zadania na jednej maszynie. Problem ów jest znany w literaturze pod nazwą 
+    "single machine scheduling". Dokładniej formuując problem, mamy zadany zbiór
+    $J = \{1,..,n\}$ składający się z $n$ zadań. Dla każdego zadania $j \in J $ definiowane są następujące własności:
+    \begin{itemize}
+        \item Czas potrzebny na wykonanie zadania ($p_{j}$)
+        \item Priorytet zadania, określany też jako waga ($w_{j}$)
+        \item Moment gotowości zadania ($r_{j}$)
+    \end{itemize}
+    Celem programu jest utworzenie harmonogramu minimalizującego iloczyn czasu zakończenia 
+    danego zadania oraz jego priorytetu.
+\section{Model}
+    W ramach utworzenia modelu zdefiniowano następujące zmienne:
+    \begin{itemize}
+        \item (max\_T = maximum(r) + sum(p) + 1) - maksymalnie czas pracy maszyny
+        \item jobs = $\{1,...,n\}$ - wektor przechowujący indeksy poszczególnych prac
+        \item times = $\{1,...,max\_T\}$ - wektor przechowujący stany maszyny w danych momentach 
+    \end{itemize}
+    To na co należy zwrócić uwagę to fakt, że w ramach rozpatrywanego zadania traktujemy czas w sposób dyskretny.
+    Zdefiniowawszy wszystkie zmienne pomocnicze poniżej przedstawiono definijcę zmiennych decyzyjnych.
+    \subsection{Zmienne decyzyjne}
+        \begin{equation}
+            x_{jt} : j \in jobs, t \in times, x_{jt} \in \{0,1\}
+        \end{equation}
+        Zmienną decyzyjną jest macierz przechowująca momenty rozpoczęcia każdego z zadań.
+        Rozpoczęcie zadania oznaczane jest przy pomocy liczby \textbf{1}, pozostałe wartości 
+        są zerowane.
+    \subsection{Ograniczenia}
+        \begin{itemize}
+            \item Każda praca może mieć tylko jeden moment rozpoczęcia 
+                \begin{equation}
+                    \sum_{j \in jobs} (\sum_{t \in times} x_{jt} = 1 )
+                \end{equation}
+            \item j-te zadanie może rozpocząć nie wcześniej, niż wskazuje na to wartość $r_{j}$
+                \begin{equation}
+                    \sum_{j \in jobs} (\sum_{t \in times} x_{jt}*t \geq r_{j})
+                \end{equation}
+            \item Maksymalnie jedno zadanie może być wykonywane w danej jednostce czasu
+                \begin{equation}
+                    \sum_{t \in times} (\sum_{j \in jobs, s \in max\{0,t-p_{j}+1 \}, t} x_{js} <= 1)
+                \end{equation}
+        \end{itemize}
+    \subsection{Funkcja celu}
+        Funkcją celu jest minimalizacja iloczynu czasu zakończenia 
+        danego zadania oraz jego priorytetu.
+        \begin{equation}
+            \sum_{t \in times, j \in jobs} w_{j} * (t+p_{j}) * x_{jt}
+        \end{equation}
+\section{Wyniki}
+    Zaimplementowany model został zaimplementowany dla następujących danych:
+    \begin{itemize}
+        \item $n = 6$
+        \item $p = [2,3,4,1,3,2] $
+        \item $w = [3,2,1,4,4,6] $
+        \item $r = [2,1,1,0,0,4] $
+    \end{itemize}
+    Wyniki prezentują się w sposób następujący:
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{|c | c |} 
+        \hline
+        Zadanie & Czas rozpoczęcia\\
+        \hline
+        1 & 6 \\
+        2 & 8 \\
+        3 & 11 \\
+        4 & 0 \\
+        5 & 1 \\
+        6 & 4 \\
+        \hline
+        \end{tabular}
+        \caption{Numer zadania wraz z momentem rozpoczęcia dla wybranego egzemplarza problemu}
+    \end{table}
+    Ponadto funkcja celu została obliczona i jej wartość wynosi \textbf{117}.
+
+
+\chapter{Zadanie 3}
+\section{Wprowadzenie}
+    Zadanie to jest naturalnym rozszerzeniem poprzedniego zadania. Tym razem mając zbiór zadań $J = \{1,..,n\}$ składający się z $n$ zadań, 
+    tworząc harmonogram mamy do dyspozycji $m$ maszyn. Ponadto zrezygnowano z wag oraz momentu gotowości zadań na rzecz relacji pierwszeństwa.
+    Jeśli dwa zadania $(i,j)$ są ze sobą w relacji to zadanie j nie może się rozpocząć przed ukończeniem zadania i. Zgodnie z treścią zadania, relacja 
+    ta jest oznaczana przy pomocy symbolu → (i → j). Celem zadania jest
+    znalezienie dopuszczalnego harmonogramu, który minimalizuje całkowity czas potrzebny do wykonania wszystkich zadań. 
+    Czas ten oznaczono jako $c\_max$.
+\section{Model}
+    W celu wykonania zadania, podobnie jak w poprzednim zadaniu, wprowadzono dodatkowe zmiennej:
+    \begin{itemize}
+        \item (max\_T = sum(p) + 1) - maksymalnie czas pracy maszyny
+        \item jobs = $\{1,...,n\}$ - wektor przechowujący indeksy poszczególnych prac
+        \item times = $\{1,...,max\_T\}$ - wektor przechowujący stany maszyny w danych momentach 
+    \end{itemize}
+    \subsection{Zmienne decyzyjne}
+    \begin{equation}
+        x_{jt} : j \in jobs, t \in times, x_{jt} \in \{0,1\}
+    \end{equation}
+    Zmienną decyzyjną jest macierz przechowująca momenty rozpoczęcia każdego z zadań.
+    Rozpoczęcie zadania oznaczane jest przy pomocy liczby \textbf{1}, pozostałe wartości 
+    są zerowane.
+    Ponadto zmienną decyzyjną jest zmienna $c\_max \geq 0$ informująca o czasie niezbędnym do wykoniania
+    wszystkich zadań.
+    \subsection{Ograniczenia}
+        \begin{itemize}
+            \item Wymagany czas nie może być mniejszy niż suma rozpoczęcia ostatniej pracy na maszynie oraz czasu jej trwania
+            \begin{equation}
+                \sum_{j \in jobs} (\sum_{t \in times} x_{jt} * (p_{j}+t)) <= c\_max
+            \end{equation}
+            \item Każda praca może mieć tylko jeden moment rozpoczęcia 
+            \begin{equation}
+                \sum_{j \in jobs} (\sum_{t \in times} x_{jt} = 1 )
+            \end{equation}
+            \item Zachowanie relacji pierwszeństwa między zadaniami
+            \begin{equation}
+                (\forall (j,relation) \in precedence) (\forall k \in relation) (\sum_{t \in times} (p_{j} + t)*x_{jt} \leq \sum_{t \in times} t*x_{kt}) 
+            \end{equation}
+            \item W jednej jednostce czasu nie może być więcej aktywny zadań niż dostepnych maszyn
+            \begin{equation}
+                \sum_{t \in times} (\sum_{j \in jobs, s \in max\{0,t-p_{j}+1 \}, t} x_{js} <= m)
+            \end{equation}
+        \end{itemize}
+    \subsection{Funkcja celu}
+    Funkcją celu jest minimalizacja zmiennej $c_max$.
+    \begin{equation}
+        min c_max
+    \end{equation}
+\section{Wyniki}
+    Działanie programu zostało przetestowane dla następujących danych zaczerpniętych
+    z treści zadania
+    \begin{itemize}
+        \item n = 9
+        \item m = 3
+        \item p = [1, 2, 1, 2, 1, 1, 3, 6, 2] 
+        \item precedence = 1 → [4], 2 → [4,5], 3 → [4,5], 4 → [6,7], 5 → [7,8], 6 → [9], 7 → [9]
+    \end{itemize}
+\end{document}
