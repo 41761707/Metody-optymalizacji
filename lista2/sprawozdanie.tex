@@ -17,17 +17,49 @@
 \tableofcontents
 \chapter{Zadanie 1}
 \section{Wprowadzenie}
-    Treść zadania: \\
-    Tartak produkuje deski o standardowej szerokości 22 cali (każda deska ma ustaloną długość). Klienci firmy zamawiają jednak deski o mniejszej szerokości (i o tej samej długości,
-jak deski o standardowej szerokości). Aktualne zamówienia opiewają na 110 desek o szerokości 7 cali, 120 desek o szerokości 5 cali i 80 desek o szerokości 3 cali. Deski o mniejszej
-szerokości są odcinane z desek o standardowej szerokości. Na przykład firma może podjąć
-decyzję o przecięciu dużej deski na dwie deski po 7 cali i jedną deskę o szerokości 5 cali.
-W tym przypadku z deski standardowej tracona jest listwa o szerokości 3 cali. Firma chce
-wykonać zamówienie w ten sposób, aby zminimalizować ilość odpadów
+    Zadanie to przedstawiało tartak, który mając podaną szerokość deski określoną w tej pracy przez zmienną $size$ mógł 
+    dokonać jej podziału na mniejsze części, odgórnie zdefiniowane przy pomocy zmiennej $cuts$. Celem tartaku było zaspokojenie 
+    zapotrzebowań na podziały określone w pracy przez zmienną $demands$ tak, aby odpad (czyli pozostałość po oryginalnej desce, której 
+    nie da się przedstawić poprzez podział na mniejsze części) były jak najmniejsze.
+    W treści zadania zmienne otrzymały odpowiednie wartości:
+    \begin{itemize}
+        \item size = 22
+        \item $cuts = \{3,5,7\}$
+        \item $demand = \{80,110,120\} $
+    \end{itemize}
 \section{Model}
-    
+    Model został zaprojektowany w sposób następujacy: dla zadanego rozmiaru oraz możliwości cięć generowane są wszystkie kombinacje cięć. 
+    Wygenerowane schematy przetrzymywane są w specjalnej macierzy z dodatkową kolumną nazywaną \textbf{odpadem}, która wyliczana jest jako 
+    rożnica rozmiaru oryginalnej deski i sumy rozmiarów cięć pomniejszych desek. Tak spreparowana macierz pozwala nam w prosty sposób 
+    wyłuskiwać istotne dla nas informacje z persepktywy rozpatrywanego zadania.
+    \subsection{Zmienne decyzyjne}
+        \begin{equation}
+            x_{i}: i \in 1,...,n
+        \end{equation}
+        gdzie n oznacza liczbę wszystkich permutacji spełniających założenia zadania.
+    \subsection{Ograniczenia}
+        \begin{itemize}
+            \item Wszystkie zapotrzebowania muszą zostać zaspokojone
+            \begin{equation}
+            \forall_{j \in cuts}  (\sum_{a=1}^{n} conf_{a,j} * x_{a} ) \geq demand_{j}   
+            \end{equation}
+        \end{itemize}
+        gdzie \textbf{conf} jest wcześniej opisywaną macierzą możliwych \textit{konfiguracji} cięć.
+    \subsection{Funkcja celu}
+        \begin{equation}
+            (\sum_{a=1}^{n} conf_{a,o} * x_{a} ) +  \sum_{j \in cuts} ( (\sum_{a=1}^{n} conf_{a,j} * x_{a} ) - d_j ) * cuts_j 
+        \end{equation}
+        gdzie indeks $o$ oznacza kolumnę zawierająca informację o odpadzie.
+        Funkcję celu można podzielić na dwa etapy. W pierwszym wyliczany jest odpad, a w drugim- nadwyżka wyprodukowanych desek. Ostatecznie 
+        dążymy do minimalizacji sumy dwóch wyodrębnionych możliwości.
 \section{Wyniki} 
-
+    Po uruchomieniu algorytmu dla zadanych w zadaniu paremtrów otrzymano następującą odpowiedź: \textbf{Odpad: 18}. Ponadto poinformował użytkownika
+    o podziale oryginalnej deski:
+    \begin{itemize}
+        \item 37 podziałów typu $[7,7,5,3]$
+        \item 28 podziałów typu $[7,5,5,5]$
+        \item 9 podziałów typu $[7,3,3,3,3,3]$
+    \end{itemize}
 \chapter{Zadanie 2}
 \section{Wprowadzenie}
     Celem zadania jest znalezienie odpowiedniego harmonogramu, według którego należy 
@@ -61,15 +93,15 @@ wykonać zamówienie w ten sposób, aby zminimalizować ilość odpadów
         \begin{itemize}
             \item Każda praca może mieć tylko jeden moment rozpoczęcia 
                 \begin{equation}
-                    \sum_{j \in jobs} (\sum_{t \in times} x_{jt} = 1 )
+                    (\forall_{j \in jobs}) (\sum_{t \in times} x_{jt} = 1 )
                 \end{equation}
             \item j-te zadanie może rozpocząć nie wcześniej, niż wskazuje na to wartość $r_{j}$
                 \begin{equation}
-                    \sum_{j \in jobs} (\sum_{t \in times} x_{jt}*t \geq r_{j})
+                    (\forall_{j \in jobs}) (\sum_{t \in times} x_{jt}*t \geq r_{j})
                 \end{equation}
             \item Maksymalnie jedno zadanie może być wykonywane w danej jednostce czasu
                 \begin{equation}
-                    \sum_{t \in times} (\sum_{j \in jobs, s \in max\{0,t-p_{j}+1 \}, t} x_{js} <= 1)
+                    (\forall_{t \in times}) (\sum_{j \in jobs, s \in max\{0,t-p_{j}+1 \}, t} x_{js} <= 1)
                 \end{equation}
         \end{itemize}
     \subsection{Funkcja celu}
@@ -134,23 +166,23 @@ wykonać zamówienie w ten sposób, aby zminimalizować ilość odpadów
         \begin{itemize}
             \item Wymagany czas nie może być mniejszy niż suma rozpoczęcia ostatniej pracy na maszynie oraz czasu jej trwania
             \begin{equation}
-                \sum_{j \in jobs} (\sum_{t \in times} x_{jt} * (p_{j}+t)) <= c\_max
+                (\forall_{j \in jobs}) (\sum_{t \in times} x_{jt} * (p_{j}+t)) <= c\_max
             \end{equation}
             \item Każda praca może mieć tylko jeden moment rozpoczęcia 
             \begin{equation}
-                \sum_{j \in jobs} (\sum_{t \in times} x_{jt} = 1 )
+                (\forall_{j \in jobs}) (\sum_{t \in times} x_{jt} = 1 )
             \end{equation}
             \item Zachowanie relacji pierwszeństwa między zadaniami
             \begin{equation}
-                (\forall (j,relation) \in precedence) (\forall k \in relation) (\sum_{t \in times} (p_{j} + t)*x_{jt} \leq \sum_{t \in times} t*x_{kt}) 
+                (\forall_{(j,relation) \in precedence)} (\forall_{k \in relation}) (\sum_{t \in times} (p_{j} + t)*x_{jt} \leq \sum_{t \in times} t*x_{kt}) 
             \end{equation}
             \item W jednej jednostce czasu nie może być więcej aktywny zadań niż dostepnych maszyn
             \begin{equation}
-                \sum_{t \in times} (\sum_{j \in jobs, s \in max\{0,t-p_{j}+1 \}, t} x_{js} <= m)
+                (\forall {t \in times}) (\sum_{j \in jobs} \sum_{s = max\{0,t-p_{j}+1 \}}^ {t} x_{js} ) <= m
             \end{equation}
         \end{itemize}
     \subsection{Funkcja celu}
-    Funkcją celu jest minimalizacja zmiennej $c_max$.
+    Funkcją celu jest minimalizacja zmiennej $c\_max$.
     \begin{equation}
         min c_max
     \end{equation}
@@ -163,4 +195,19 @@ wykonać zamówienie w ten sposób, aby zminimalizować ilość odpadów
         \item p = [1, 2, 1, 2, 1, 1, 3, 6, 2] 
         \item precedence = 1 → [4], 2 → [4,5], 3 → [4,5], 4 → [6,7], 5 → [7,8], 6 → [9], 7 → [9]
     \end{itemize}
+    Poniżej przedstawiono wyniki w formie tabeli:
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{|c | c | c | c | c | c | c | c | c | c |} 
+        \hline
+        Maszyna & Slot1 & Slot2 & Slot3 & Slot4 & Slot5 & Slot6 & Slot7 & Slot8 & Slot9\\
+        \hline
+        1 & 3 & 1 & 4 & 4 & 0 & 0 & 6 & 9 & 9 \\
+        2 & 2 & 2 & 5 & 0 & 7 & 7 & 7 & 0 & 0  \\
+        3 & 0 & 0 & 0 & 8 & 8 & 8 & 8 & 8 & 8  \\
+        \hline
+        \end{tabular}
+        \caption{Maszyna oraz zadanie, które jest na niej wykonywane w danym slocie czasu. 0 oznacza brak zadania}
+    \end{table}
+
 \end{document}

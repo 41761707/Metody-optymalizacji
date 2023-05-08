@@ -54,16 +54,17 @@ function SingleMachineScheduling(n,p::Vector{Int},r::Vector{Int},w::Vector{Int})
     end
 end
 
+#-----------------------------#
+#       SEKCJA DANYCH
+#-----------------------------#
 #Definicje zmiennych
-#n = 6
-#p = [2,3,4,1,3,2]
-#w = [3,2,1,4,4,6]
-#r = [2,1,1,0,0,4]
-
-n = 5
-p = [20, 10, 35, 15, 5]
-w = [5, 5, 1, 15, 10]
-r = [20, 10, 45, 1, 15]
+n = 6
+p = [2,3,4,1,3,2]
+w = [3,2,1,4,4,6]
+r = [2,1,1,0,0,4]
+#-----------------------------#
+#       SEKCJA DANYCH
+#-----------------------------#
 
 #Wywołanie funkcji
 (status,cel,momenty) = SingleMachineScheduling(n,p,r,w)

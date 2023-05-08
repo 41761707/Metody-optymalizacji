@@ -64,37 +64,57 @@ function MultiMachineScheduling(n::Int,m::Int,p::Vector{Int},precedence::Dict{In
     end    
 end
 
+#-----------------------------#
+#       SEKCJA DANYCH
+#-----------------------------#
 #Definicje zmiennych
 n = 9
 m = 3                         
 p = [1, 2, 1, 2, 1, 1, 3, 6, 2]  
 #Pierwszeństwo w formie słownika  
 precedence = Dict(1 => [4], 2 => [4,5], 3 => [4,5], 4 => [6,7], 5 => [7,8], 6 => [9], 7 => [9],)
+#-----------------------------#
+#       SEKCJA DANYCH
+#-----------------------------#
 
 #Wywołanie funkcji
-(status, cel, momenty) = MultiMachineScheduling(n, m, p, precedence)
+(status, cel, x) = MultiMachineScheduling(n, m, p, precedence)
 
-#Wypisanie wyniku
+jobs = 1:n
+flag = false
+max_T = sum(p) + 1
+times = 0:max_T
+machines = [zeros(Int,Int(cel)) for i in 1:m]
+#Mocno eksperymentalne wypisanie wyniku, oby zadziałało
 if status==MOI.OPTIMAL
     println("Funkcja celu: ",cel)
-    println(momenty)
+    println("Harmonogram: ")
+    println(x)
+    for j in jobs
+        for t in times
+            if x[j,t] != 0 
+                for machine in machines
+                    for z in (t+1):(t+p[j])
+                        if machine[z] != 0
+                            global flag = true
+                            break
+                        end
+                    end
+                    if flag
+                        global flag = false
+                    else
+                        for z in (t+1):(t+p[j])
+                            machine[z] = j
+                        end
+                        break
+                    end
+                end
+            end
+        end
+    end
+    for j in eachindex(machines)
+        println("Maszyna $j : ",machines[j])
+    end
 else
     println("Status: ",status)
 end
-
-#=
-println("Status: ", status)
-println("Objective function: ", obj_val)
-println("End moments:")
-J = 1:n
-T = 0:(sum(p)+1)
-for j in J
-    println("$j:")
-    for t in T
-        if x[j,t] == 1
-            temp = t + p[j]
-            println("\t $temp")
-        end
-    end
-end
-=#
