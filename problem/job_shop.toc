@@ -1,0 +1,17 @@
+\contentsline {chapter}{\numberline {1}Wprowadzenie}{2}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Opis problemu}{2}{section.1.1}%
+\contentsline {chapter}{\numberline {2}Przykładowe reprezentacje problemu}{4}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Graf rozłączny}{4}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Zdarzeniowy graf sieciowy}{5}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Model matematyczny}{5}{section.2.3}%
+\contentsline {chapter}{\numberline {3}Zastosowania}{7}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Zarządzanie zadaniami na wielu procesorach}{7}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Harmonogramowanie w kolejnictwie}{7}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Zarządzanie produkcją w fabryce}{7}{section.3.3}%
+\contentsline {chapter}{\numberline {4}Rozwój metodologii rozwiązań}{8}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Programowanie matematyczne}{8}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Heurystyki}{8}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Metaheurystyki, algorytmy ewolucyjne}{8}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Sztuczna inteligencja}{9}{section.4.4}%
+\contentsline {chapter}{\numberline {5}Podsumowanie}{10}{chapter.5}%
+\contentsline {section}{Bibliografia}{11}{section*.2}%

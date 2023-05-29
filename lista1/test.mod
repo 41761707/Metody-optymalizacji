@@ -1,33 +1,31 @@
+var a1 >= 0;
+var a2 >= 0;
+var a3 >= 0;
+
 var b1 >= 0;
-var b1_oil_home >= 0;
-var b1_oil_heavy >= 0;
-var b1_dist_crack >= 0;
-var b1_dist_heavy >= 0;
 var b2 >= 0;
-var b2_oil_home >= 0;
-var b2_oil_heavy >= 0;
-var b2_dist_crack >= 0;
-var b2_dist_heavy >= 0;
+var b3 >= 0;
 
-minimize cost: 1310*b1 + 1510*b2 + 20*b1_dist_crack + 20*b2_dist_crack;
+var c1 >= 0;
+var c2 >= 0;
+var c3 >= 0;
 
-s.t. petrol: 
-    0.15*b1 + 0.1*b2 + 0.5*b1_dist_crack + 0.5*b2_dist_crack >= 200000;
-s.t. home: 
-    b1_oil_home + b2_oil_home + 0.2*b1_dist_crack + 0.2*b2_dist_crack >= 400000;
-s.t. heavy: 
-    b1_oil_heavy + b1_dist_heavy + 0.15*b1 + b2_oil_heavy + b2_dist_heavy + 0.25*b2 + 0.06*b1_dist_crack + 0.06*b2_dist_crack >= 250000;
+var d1 >= 0;
+var d2 >= 0;
+var d3 >= 0;
 
-s.t. b1_oil: b1_oil_home + b1_oil_heavy == 0.4*b1;
-s.t. b2_oil: b2_oil_home + b2_oil_heavy == 0.35*b2;
-s.t. b1_dist: b1_dist_crack + b1_dist_heavy == 0.15*b1;
-s.t. b2_dist: b2_dist_crack + b2_dist_heavy == 0.2*b2;
+subject to a_max : a1 + a2 + a3 <= 400;
+subject to b_max : b1 + b2 + b3 <= 100;
+subject to c_max : c1 + c2 + c3 <= 150;
+subject to d_max : d1 + d2 + d3 <= 500;
 
-s.t. limits: 
-    0.002 * b1_oil_home + 0.003 * b1_dist_crack * 0.2 + 0.012 * b2_oil_home + 0.025 * b2_dist_crack * 0.2 <= (b1_oil_home + b2_oil_home + b1_dist_crack*0.2 + b2_dist_crack*0.2)*0.005;
+subject to m_1_max : 12*a1 + 20*b1 + 15 * c1 + 15 * d1 <= 60;
+subject to m_2_max : 6*a1 + 10*b1 + 12 * c1 + 30 * d1 <= 60;
+subject to m_3_max : 10*a1 + 15*b1 + 20 * c1 + 60 * d1 <= 60;
+
 
 solve;
 
-display cost;
+data;
 
 end;

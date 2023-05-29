@@ -1,0 +1,129 @@
+\begin{thebibliography}{10}
+
+\bibitem{zanieczyszczenia_jobshop}
+Giuseppina Ambrogio, Rosita Guido, Domenico Palaia, and Luigino Filice.
+\newblock Job shop scheduling model for a sustainable manufacturing.
+\newblock {\em Procedia Manufacturing}, 42:538--541, 2020.
+\newblock International Conference on Industry 4.0 and Smart Manufacturing (ISM
+  2019).
+
+\bibitem{GA_1}
+Leila Asadzadeh.
+\newblock A local search genetic algorithm for the job shop scheduling problem
+  with intelligent agents.
+\newblock {\em Computers \& Industrial Engineering}, 85:376--383, 2015.
+
+\bibitem{disjunctive_graph}
+Jacek Błażewicz, Erwin Pesch, and Małgorzata Sterna.
+\newblock The disjunctive graph machine representation of the job shop
+  scheduling problem.
+\newblock {\em European Journal of Operational Research}, 127(2):317--331,
+  2000.
+
+\bibitem{fjssp}
+Stéphane Dauzère-Pérès, Junwen Ding, Liji Shen, and Karim Tamssaouet.
+\newblock The flexible job shop scheduling problem: A review.
+\newblock {\em European Journal of Operational Research}, 2023.
+
+\bibitem{jobshop_usage_multiprocessor}
+Maciej Drozdowski.
+\newblock Scheduling multiprocessor tasks — an overview.
+\newblock {\em European Journal of Operational Research}, 94(2):215--230, 1996.
+
+\bibitem{CP_1}
+Soroush Fatemi-Anaraki, Reza Tavakkoli-Moghaddam, Mehdi Foumani, and Behdin
+  Vahedi-Nouri.
+\newblock Scheduling of multi-robot job shop systems in dynamic environments:
+  Mixed-integer linear programming and constraint programming approaches.
+\newblock {\em Omega}, 115:102770, 2023.
+
+\bibitem{Graham_competetive}
+R.~L. Graham.
+\newblock Bounds for certain multiprocessing anomalies.
+\newblock {\em The Bell System Technical Journal}, 45(9):1563--1581, 1966.
+
+\bibitem{AI_2}
+Yong Gui, Dunbing Tang, Haihua Zhu, Yi~Zhang, and Zequn Zhang.
+\newblock Dynamic scheduling for flexible job shop using a deep reinforcement
+  learning approach.
+\newblock {\em Computers \& Industrial Engineering}, 180:109255, 2023.
+
+\bibitem{MH_2}
+Hui Li, Xi~Wang, and Jianbiao Peng.
+\newblock A hybrid differential evolution algorithm for flexible job shop
+  scheduling with outsourcing operations and job priority constraints.
+\newblock {\em Expert Systems with Applications}, 201:117182, 2022.
+
+\bibitem{kolejnictwo_jobshop}
+Shi~Qiang Liu and Erhan Kozan.
+\newblock Scheduling trains as a blocking parallel-machine job shop scheduling
+  problem.
+\newblock {\em Computers \& Operations Research}, 36(10):2840--2852, 2009.
+
+\bibitem{CP_2}
+Leilei Meng, Chaoyong Zhang, Yaping Ren, Biao Zhang, and Chang Lv.
+\newblock Mixed-integer linear programming and constraint programming
+  formulations for solving distributed flexible job shop scheduling problem.
+\newblock {\em Computers \& Industrial Engineering}, 142:106347, 2020.
+
+\bibitem{IP_2}
+CHAO-HSIEN PAN.
+\newblock A study of integer programming formulations for scheduling problems.
+\newblock {\em International Journal of Systems Science}, 28(1):33--41, 1997.
+
+\bibitem{graf_sieciowy}
+Junyoung Park, Jaehyeong Chun, Sang Kim, Youngkook Kim, and Jinkyoo Park.
+\newblock Learning to schedule job-shop problems: representation and policy
+  learning using graph neural network and reinforcement learning.
+\newblock {\em International Journal of Production Research}, 59:1--18, 01
+  2021.
+
+\bibitem{MH_1}
+Carlos~A.S. Passos, Vitor~M. Iha, and Rafael~B. Dominiquini.
+\newblock A multi-agents approach to solve job shop scheduling problems using
+  meta-heuristics.
+\newblock {\em IFAC Proceedings Volumes}, 43(17):198--203, 2010.
+\newblock 5th IFAC Conference on Management and Control of Production
+  Logistics.
+
+\bibitem{GA_2}
+Bo~Peng, Zhipeng Lü, and T.C.E. Cheng.
+\newblock A tabu search/path relinking algorithm to solve the job shop
+  scheduling problem.
+\newblock {\em Computers \& Operations Research}, 53:154--164, 2015.
+
+\bibitem{jobshop_usage_multiprocessor_2}
+Brucker Peter and Krämer Andreas.
+\newblock Shop scheduling problems with multiprocessor tasks on dedicated
+  processors.
+
+\bibitem{energia_jobshop}
+Liji Shen, Stéphane Dauzère-Pérès, and Söhnke Maecker.
+\newblock Energy cost efficient scheduling in flexible job-shop manufacturing
+  systems.
+\newblock {\em European Journal of Operational Research}, 2023.
+
+\bibitem{AI_1}
+David Tremblet, Simon Thevenin, and Alexandre Dolgui.
+\newblock Predicting makespan in flexible job shop scheduling problem using
+  machine learning.
+\newblock {\em IFAC-PapersOnLine}, 55(10):1--6, 2022.
+\newblock 10th IFAC Conference on Manufacturing Modelling, Management and
+  Control MIM 2022.
+
+\bibitem{IP}
+Harvey~M. Wagner.
+\newblock An integer linear-programming model for machine scheduling.
+\newblock {\em Naval Research Logistics Quarterly}, 6(2):131--140, 1959.
+
+\bibitem{czas_jobshop}
+Zigao Wu, Shudong Sun, and Shaohua Yu.
+\newblock Optimizing makespan and stability risks in job shop scheduling.
+\newblock {\em Computers \& Operations Research}, 122:104963, 2020.
+
+\bibitem{AI_3}
+Erdong Yuan, Shuli Cheng, Liejun Wang, Shiji Song, and Fang Wu.
+\newblock Solving job shop scheduling problems via deep reinforcement learning.
+\newblock {\em Applied Soft Computing}, 143:110436, 2023.
+
+\end{thebibliography}

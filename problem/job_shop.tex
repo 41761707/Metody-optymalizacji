@@ -1,0 +1,215 @@
+\documentclass[12pt, a4paper]{report}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    urlcolor=blue,
+    citecolor=black
+}
+\usepackage[compact]{titlesec}
+\titleformat{\chapter}{}{}{0em}{\bf\LARGE}
+\usepackage{lipsum}
+
+
+\renewcommand{\contentsname}{Spis treści}
+\renewcommand{\refname}{Bibliografia}
+
+\title{ Job shop scheduling}
+\author{Opracowanie wybranego problemu optymalizacyjnego \\
+Radosław Wojtczak, numer indeksu: 254607}
+\date{28.05.2023}
+\begin{document}
+\maketitle
+\tableofcontents
+
+\chapter{Wprowadzenie}
+  \section{Opis problemu}
+  
+  \textbf{Job shop scheduling problem (JSSP)}  jest jednym z popularniejszych problemów optymalizacyjnych. 
+  Jego celem jest znalezienie optymalnego sposobu alokacji współdzielonych zasobów w czasie względem 
+  konkurujących ze sobą aktywności, tak aby czas realizacji aktywności był jak najmniejszy.
+  W ogólności wskazany problem definiuje się w następujący sposób:
+  \begin{itemize}
+    \item liczba $n$ określą liczbę prac (ang. jobs), które muszą zostać zrealizowane
+    $(J_{1}, \dots, J_{n})$
+    \item liczba $m$ okreslą liczbę współdzielonych zasobów (często w odniesieniu 
+    do zasobów używa się określenia \textit{maszyny}) $(M_{1}, \dots, M_{m})$
+    \item celem jest utworzenie takiego harmonogramu, aby czas realizacji zadań
+    był jak najmniejszy (czas ten najczęściej w literaturze określany jest mianem \textbf{makespan})
+  \end{itemize}
+  Termin \textit{job shop} pochodzi od charakterstycznego modelu produkcji, w którym różne zadania (jobs) przechodzą 
+  przez różne etapy produkcji w zakładzie produkcyjnym (shop). Na podstawie pochodzenia nazwy problemu łatwo zauważyć,
+  iż jestem to problem, który wywodzi się bezpośrednio z potrzeb życia codziennego, stąd jest on jednym z pierwszych 
+  problemów kombinatorycznych, dla którego przeprowadzono analizę konkurencyjności (ang. competetive analysis) \cite{Graham_competetive} \\
+  Ze względu na szeroką gamę zastosowań, na przestrzeni lat wytworzyło się wiele odmian wskazanego problemu.
+  W podstawowych rozważaniach każde z zadań składa się ze zbioru $k$ operacji $(O_{1}, \dots, O_{k})$ które muszą zostać wykonane 
+  w odpowiedniej kolejności (co znane jest jako \textit{precedence constraint}). Każda z operacji 
+  wykonuje się określony czas oraz każda z maszyn może wykonywać jedną operację w danym momencie. Istnieje
+  wiele odmian problemu, takie jak:
+  \begin{itemize}
+    \item \textit{flexible job shop with duplicate machines} pozwalające na istnienie takich samych maszyn, czego naturalnym
+    rozszerzeniem jest \textit{flexible job shop, FJSSP} który dopuszcza istnienie wielu (lub nawet wszystkich) identycznych maszyn, 
+    bądź identycznych grup maszyn
+    \item odmiany, w których nakładane są ograniczenia na maszyny (wymuszenie przestojów, przerw w działaniu)
+    \item odmiany, w których nakładane są ograniczenia na prace ($i-ta$ praca może rozpocząć się dopiero,
+    gdy $j-ta$ praca się zakończy)
+  \end{itemize}
+
+\chapter{Przykładowe reprezentacje problemu}
+  \section{Graf rozłączny}
+  Najpopularniejszy sposób reprezentacji problemu job shop scheduling wykorzystuje strukturę 
+  o nazwie \textbf{graf rozłączny} (ang.disjunctive graph) \cite{disjunctive_graph}.
+  Graf rozłączny jest grafem skierowanym $ G =(V,C \: \cup \: D)$, gdzie:
+  \begin{itemize}
+    \item V oznacza zbiór 
+    wierzchołków odpowiadający zadaniom (bądź operacjom, które wchodzą w skład zadań, w zależności od rozpatrywanej instancji problemu),
+    który zawiera w sobie dodatkową, sztucznie wytworzoną parę wierzchołków: początkowy (\textit{start}) oraz końcowy (\textit{sink}). 
+    Oba wyróżnione wierzchołki mają zerowy czas wykonywania, istnieją jedynie po to, aby ustalić relację wykonywania zadań (zadanie startowe
+    musi zostać wykonany przed wszystkimi innymi zadaniami, natomiast zadanie końcowe zostaje wykonane wtedy, gdy zostaną ukończone wszystkie pozostałe czynności).
+    \item C to zbiór łuków łączących (conjunctive arcs), 
+    które odzwierciedlają początkowe ograniczenia kolejności, 
+    łączące każde dwie kolejne operacje tego samego zadania
+    \item Nieskierowane krawędzie rozłączne należące do zbioru D 
+    łączą wzajemnie nieuporządkowane zadania, 
+    które wymagają tej samej maszyny do wykonania 
+    (krawędź rozłączna może być reprezentowana przez dwa przeciwstawne łuki skierowane). 
+    Każdy łuk jest oznaczony dodatnią wagą równą czasowi wykonania zadania, 
+    od którego łuk się zaczyna.
+  \end{itemize}
+  W modelu grafu rozłącznego (disjunctive graph), znalezienie optymalnego 
+  porządku wykonaia wszystkich zadań na maszynach
+  równoważne jest z wyborem jednego łuku w każdej dysjunkcji, czyli zamienieniem 
+  każdej nieskierowanej krawędzi dysjunkcyjnej na skierowaną krawędź łączącą. 
+  Poprzez ustalenie kierunków wszystkich krawędzi dysjunkcyjnych, 
+  określa się kolejność wykonywania wszystkich konfliktujących zadań wymagających 
+  tej samej maszyny, co prowadzi do uzyskania kompletnego harmonogramu.
+  Ponadto, uzyskany graf musi być acykliczny, a jeśli jest optymalny, 
+  to długość najdłuższej ścieżki od źródła do ujścia jest minimalna. 
+  Ta najdłuższa ścieżka określa \textit{makespan}
+
+  \section{Zdarzeniowy graf sieciowy}
+  Graf rozłączny zawiera jedynie statyczne informacje o problemie, takie jak czasy trwania
+  operacji, czy ograniczenia odnośnie kolejności, bez uwzględnienia dynamicznie
+  zmieniających się informacji w ramach konstruowania harmonogramu. 
+  Zdarzeniowy graf sieciowy (Event-based Network Graph) wprowadza do wezłów grafu dodatkowe 
+  informacje, tak aby graf G reprezentował bieżący stan JSSP podczas planowania.
+  \cite{fjssp} \cite{graf_sieciowy}
+
+  \section{Model matematyczny}
+  W celu reprezentacji problemu z rodziny job shop popularne jest wykorzystanie modelu 
+  matematycznego, który może być pomocny chociażby podczas próby rozwiązania wspomnianego 
+  zagadnienia przy pomocy technik programowania matematycznego, w którego skład wchodzi programowanie liniowe,
+  czy programowanie całkowitoliczbowe.
+  Zdefiowawszy następującą instancję problemu: \\
+  $jobs = \{1, \dots, n\} $ - zbiór składający się z n zadań, $m$- liczba identycznych maszyn, $(i,j)$-
+  relacja pierwszeństwa między zadanami, która oznacza, iż zadanie $j$ może rozpocząć się dopiero wtedy, gdy 
+  zadanie $j$ zostanie ukończone.  Celem zadania jest znalezienie dopuszczalnego harmonogramu, który
+  minimalizuje całkowity czas potrzebny do wykonania wszystkich zadań. Czas
+  ten oznaczono jako $c\_max$.\\
+  W poniższy sposób prezentuje się jej model programowania liniowego:
+  \begin{itemize}
+      \item Wymagany czas nie może być mniejszy niż suma rozpoczęcia ostatniej pracy na maszynie oraz czasu jej trwania
+      \begin{equation}
+          (\forall {j \in jobs}) (\sum_{t \in times} x_{jt} * (p_{j}+t)) \leq c\_max
+      \end{equation}
+      \item Każda praca może mieć tylko jeden moment rozpoczęcia 
+      \begin{equation}
+          (\forall {j \in jobs}) (\sum_{t \in times} x_{jt} = 1 )
+      \end{equation}
+      \item Zachowanie relacji pierwszeństwa między zadaniami
+      \begin{equation}
+          (\forall {(j,k) \in precedence)}(\sum_{t \in times} (p_{j} + t)*x_{jt} \leq \sum_{t \in times} t*x_{kt}) 
+      \end{equation}
+      \item W jednej jednostce czasu nie może być więcej aktywny zadań niż dostepnych maszyn
+      \begin{equation}
+          (\forall {t \in times}) (\sum_{j \in jobs} \sum_{s = max\{0,t-p_{j}+1 \}}^ {t} x_{js} ) \leq m
+      \end{equation}
+  \end{itemize}
+  gdzie zbiór \textit{times} oznacza horyzont zdarzeń, czyli dyskretny podział czasu na sloty, w których dana maszyna może obsłużyć zadanie, a 
+  \begin{equation}
+    x_{jt} : j \in jobs, t \in times, x_{jt} \in \{0,1\}
+  \end{equation}
+  jest zmienną decyzyjną w formie macierzy przechowującej momenty rozpoczęcia każdego z zadań.
+  Powyższy opis wraz z naturalną definicją funkcji celu jako minimalizacji zmiennej 
+  \begin{equation}
+    min \: c\_max
+  \end{equation}
+  tworzy model programowania liniowego dla pewnej odmiany problemu JSSP.
+
+\chapter{Zastosowania}
+  \section{Zarządzanie zadaniami na wielu procesorach}
+    Instrukcje programu komputerowego można traktować jako zadania, a maszyny jako procesory w komputerze.
+    Zgodnie z powyższym możemy założyć, że istnieją pewne zadania, które muszą zostać wykonanie jednocześnie na dwóch bądź więcej procesorach, co
+    sprowadza się do ustalenia harmonogramu zadań tak, aby każdy z procesorów potrzebnych do realizacji danego zdania w danym momencie był dostepny oraz 
+    aby żaden procesor nie realizował dwóch zadań jednocześnie. Jest to perfekcyjny przykład, w którym można wykorzystać metody przedstawione w JSSP, co pokazują
+    prace \cite{jobshop_usage_multiprocessor}, \cite{jobshop_usage_multiprocessor_2} 
+    
+  \section{Harmonogramowanie w kolejnictwie}
+    Problem harmonogramowania w kolejnictwie można modelować jako problem job-shop poprzez podzielenie sieci
+    kolejowej na segmenty torów. Jako zadanie traktuje się pociąg, który musi dostać się z pewnego 
+    miejsca początkowego do celu. Jako operacje uznaje się segmenty torów na trasie, co bezpośrednio wynika z chrakterystyki kolei- 
+    pociągi nie mogą wykonywać manewrów wymijania, więc istotnym jest, aby tylko jeden pociąg w danej jednostce czasu 
+    okupował daną część trasy. Czas przetwarzania operacji to czas potrzebny na przejazd przez segment toru. Cała problematyka sprowadza się do utworzenia harmonogramu 
+    w taki sposób, aby zmimializować czas, w którym pociągi oczekują na możliwość wjechania do odpowiedniego segmentu torów. \cite{kolejnictwo_jobshop}
+
+  \section{Zarządzanie produkcją w fabryce}
+  Ze względu na wielokrotne wykorzystanie analogii między maszynami a zadaniami, zarządzanie fabryką jest głównym obszarem zastosowania problemu optymalizacyjnego job shop. 
+  W kontekście zarządzania fabryką,  problem job shop scheduling dotyczy efektywnego harmonogramowania zadań na maszynach w celu minimalizacji 
+  takich rzeczy jak czasu realizacji \cite{czas_jobshop}, zużycia energii \cite{energia_jobshop} czy produkcji odpadów bądź zanieczyszczeń \cite{zanieczyszczenia_jobshop}.
+
+
+\chapter{Rozwój metodologii rozwiązań}
+  \section{Programowanie matematyczne}
+    Pierwsze prace nad problemem JSSP skoncentrowały się na rozwoju matematycznych modeli opisujących problem i 
+    opracowaniu algorytmów optymalizacyjnych. Jednym z wczesnych podejść było użycie metod programowania całkowitoliczbowego 
+    (integer programming) \cite{IP} \cite{IP_2}, które opierały się na sformułowaniu problemu jako zadania minimalizacji 
+    pewnej funkcji celu przy pewnych ograniczeniach. Ponadto wykorzystano takie techniki rozwiązywania problemów jak 
+    programowanie liniowe (linear programming), programowanie liniowe całkowitoliczbowe
+    (mixed-integer linear programming) czy programowanie ograniczeń (constraint programming) \cite{CP_1} \cite{CP_2}. 
+    Te metody umożliwiały bardziej precyzyjne modelowanie i rozwiązywanie problemu, uwzględniając dodatkowe ograniczenia i zależności 
+    między operacjami.
+
+    \section{Heurystyki}
+    Wraz z rozwojem technologii i rosnącą dostępnością komputerów, pojawiły się nowe metody rozwiązywania problemu JSSP. 
+    Algorytmy heurystyczne, takie jak przeszukiwanie lokalne (local search) i algorytmy genetyczne (genetic algorithms), \cite{GA_1} \cite{GA_2}
+    zaczęły być wykorzystywane do rozwiązywania tego problemu. Metody te mogły generować satysfakcjonujące rozwiązania w krótszym czasie,
+    choć niekoniecznie optymalne.
+
+    \section{Metaheurystyki, algorytmy ewolucyjne}
+    Wraz z postępem naukowym, zastosowanie innych metod, takich jak metaheurystyki, systemy wieloagentowe i algorytmy ewolucyjne, 
+    stało się popularne w rozwiązywaniu problemu JSSP \cite{MH_1} \cite{MH_2}. Te zaawansowane techniki algorytmiczne i sztucznej inteligencji były w stanie 
+    generować coraz lepsze i bardziej optymalne harmonogramy, uwzględniając różne cele i ograniczenia.
+
+    \section{Sztuczna inteligencja}
+    Obecnie, wraz z rozwojem technologii i wzrostem ilości dostępnych danych, popularne stało się wykorzystywanie uczenia maszynowego i 
+    sztucznej inteligencji do rozwiązywania problemu JSSP. Metody oparte na głębokim uczeniu (deep learning) są 
+    stosowane do generowania optymalnych harmonogramów, a także do automatycznego uczenia się z wcześniejszych rozwiązań. \cite{AI_1} \cite{AI_2} \cite{AI_3}
+
+\chapter{Podsumowanie}
+  Job shop scheduling jest istotnym problemem kombinatorycznym, 
+  który znajduje swoje zastosowanie w wielu dziedzinach. Z tego względu 
+  wielu specjalistów poświęciło znaczną część swojego zawodowego życia aby 
+  rozwijać metody i technologie wykorzystywane przy 
+  tworzeniu nowych sposobów rozwiązań opisywanego problemu. 
+  Począwszy od opracowania 
+  matematycznych modeli, takich jak programowanie całkowitoliczbowe i 
+  programowanie liniowe, aż po rozwinięcie algorytmów optymalizacyjnych, 
+  heurystyk, czy wykorzystania uczenia maszynowego, 
+  możliwe stało się szybkie i skuteczne poszukiwanie optymalnych 
+  lub bliskich optymalnych rozwiązań. Osiągnięcia w dziedzinie job shop scheduling 
+  mają ogromne znaczenie dla różnych sektorów i branż, takich jak produkcja, 
+  logistyka, czy transport. Poprawa planowania i harmonogramowania zadań 
+  przekłada się na zwiększenie wydajności, redukcję czasu przestoju maszyn, 
+  minimalizację kosztów i poprawę jakości produkcji oraz środowiska, 
+  co bezpośrednio wpływa na lepsze i łatwiejsze funkcjonowanie 
+  ludzi w otaczającym ich świecie.
+
+
+  \clearpage
+  \phantomsection
+  \addcontentsline{toc}{section}{Bibliografia}
+  \bibliographystyle{plain}
+  \bibliography{literatura}
+\end{document}
