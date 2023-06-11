@@ -1,8 +1,8 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2022.5.18)  11 JUN 2023 22:57
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2022.5.18)  12 JUN 2023 00:59
 entering extended mode
- \write18 enabled.
+ restricted \write18 enabled.
  %&-line parsing enabled.
-**sprawozdanie
+**sprawozdanie.tex
 (./sprawozdanie.tex
 LaTeX2e <2020-02-02> patch level 2
 L3 programming layer <2020-02-14>
@@ -437,17 +437,17 @@ Rozdzia\PlPrIeC {\l } 3.
 <./wykresy/1.png, id=76, 794.97pt x 418.56375pt>
 File: ./wykresy/1.png Graphic file (type png)
 <use ./wykresy/1.png>
-Package pdftex.def Info: ./wykresy/1.png  used on input line 120.
+Package pdftex.def Info: ./wykresy/1.png  used on input line 125.
 (pdftex.def)             Requested size: 397.48402pt x 209.28136pt.
 
-Overfull \hbox (7.48402pt too wide) in paragraph at lines 120--122
+Overfull \hbox (7.48402pt too wide) in paragraph at lines 125--127
  [][] 
  []
 
 <./wykresy/2.png, id=77, 757.32938pt x 405.01312pt>
 File: ./wykresy/2.png Graphic file (type png)
 <use ./wykresy/2.png>
-Package pdftex.def Info: ./wykresy/2.png  used on input line 125.
+Package pdftex.def Info: ./wykresy/2.png  used on input line 130.
 (pdftex.def)             Requested size: 378.66376pt x 202.50606pt.
 [5
 
@@ -456,40 +456,40 @@ as been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.128   \end{figure}
+l.133   \end{figure}
                     ] [6pdfTeX warning (ext4): destination with the same identi
 fier (name{figure.3.1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.130 \chapter
+l.135 \chapter
               {Pełna tabela}pdfTeX warning (ext4): destination with the same i
 dentifier (name{figure.3.2}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.130 \chapter
+l.135 \chapter
               {Pełna tabela} <./wykresy/1.png> <./wykresy/2.png>]
 Rozdzia\PlPrIeC {\l } 4.
 
-Underfull \vbox (badness 10000) detected at line 154
+Underfull \vbox (badness 10000) detected at line 159
  []
 
 [7
 
 ] [8] [9] [10] [11] [12] (./sprawozdanie.bbl)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 349.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 354.
  [13
 
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 349.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 354.
  (./sprawozdanie.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 349.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 349.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 354.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 354.
 Package rerunfilecheck Info: File `sprawozdanie.out' has not changed.
 (rerunfilecheck)             Checksum: 531A40E0A608A235F6BBA4984851963B;252.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 349.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 354.
  ) 
 Here is how much of TeX's memory you used:
  6642 strings out of 483075
@@ -498,7 +498,7 @@ Here is how much of TeX's memory you used:
  21480 multiletter control sequences out of 15000+600000
  544647 words of font info for 61 fonts, out of 8000000 for 9000
  79 hyphenation exceptions out of 8191
- 35i,9n,34p,277b,413s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 35i,9n,34p,282b,413s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/plit.enc}{/usr/share/texliv
 e/texmf-dist/fonts/enc/dvips/pl/plms.enc}{/usr/share/texlive/texmf-dist/fonts/e
 nc/dvips/pl/plme.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/plrm.enc
@@ -513,7 +513,7 @@ live/texmf-dist/fonts/type1/public/pl/plr17.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/public/pl/plr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
 c/pl/plsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plsy8.pfb>
 </usr/share/texlive/texmf-dist/fonts/type1/public/pl/plti12.pfb>
-Output written on sprawozdanie.pdf (14 pages, 157771 bytes).
+Output written on sprawozdanie.pdf (14 pages, 158239 bytes).
 PDF statistics:
  176 PDF objects out of 1000 (max. 8388607)
  144 compressed objects within 2 object streams

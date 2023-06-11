@@ -40,7 +40,7 @@
   Zaimplementowany algorytm jest sposobem na rozwiązanie problemu harmonogramowania zadań na niezależnych, równoległych
   maszynach (ang. Scheduling on unrelated parallel machines). Problem ten polega na przypisaniu 
   zbioru zadań do zbioru niezależnych, równoległych maszyn w taki sposób, aby minimalizować czas wykonania wszystkich zadań.
-  W opisywanym problemie każde zadania ma określony czas wykoniania na każdej z rozpatrywanych maszyn.
+  W opisywanym problemie każde zadania ma określony czas wykonania na każdej z rozpatrywanych maszyn.
   Przedstawiając powyższe w zwięzłej, matematycznej formie:
   \begin{itemize}
     \item J - zbiór zadań, $n = |J|$
@@ -53,9 +53,9 @@
 
   \end{itemize}
   Próbując utworzyć model programowania liniowego dla wskazanego problemu najlepiej zacząć 
-  od konstrukcji modeulu programowania całkowitoliczbowego:
+  od konstrukcji modelu programowania całkowitoliczbowego:
   \begin{itemize}
-    \item $min \: t$, gdzie t sumarycznym czasem realizacji zadania na najdłużej pracujacej maszynie
+    \item $min \: t$, gdzie t jest sumarycznym czasem realizacji zadania na najdłużej pracujacej maszynie
     \item Każda z prac może być zrealizowana tylko na jednej maszynie
     \begin{equation}
       \sum_{i \in M} x_{ij} = 1 \: : \: j \in J
@@ -83,11 +83,16 @@
     \item Skonstruuj graf i znajdź w nim doskonałe skojarzenie
     \item Przypisz zadania z wartościami ułamkowymi do maszyn zgodnie ze skojarzeniem
   \end{enumerate}
+  W omawianej implementacji $\alpha$ przedstawia maszynę, której suma czasów realizacji zadań jest minimalna (wynika to z faktu, iż 
+  w prezentowanym problemie największym ograniczeniem górnym na czas realizacji jest umieszczenie wszystkich zadań na jednej maszynie, 
+  które zrealizuje je najszybciej). \\
   Dzięki powyższemu algorytmowi, wcześniej przedstawiony model możemy sprowadzić do programowania 
   liniowego zastępując definicję zmiennych decyzyjnych w następujący sposób
   \begin{equation}
     x_{ij} \geq \{0,1\} \: : \: i \in M, \: j \in J
   \end{equation}
+  Wynika to z faktu, iż zmienne decyzyjne, które nie będą spełniały wymogów zadania zostaną odpowiednio zmodyfikowane przez 
+  wyżej wspominany algorytm. \\
   Celem następnych sekcji jest eksperymentalne ocenienie jakości proponowanego algorytmu aproksymacyjnego.
 
 \chapter{Otrzymane wyniki}
@@ -112,7 +117,7 @@
     512 & 484.0 & 501 & 968.0 \\
     \hline
     \end{tabular}
-    \caption{Porownanie wybranych wyników optymalnych oraz wyprodukowanych przez algorytm dla wybranych instancji z rozpatrywanej biblioteki}
+    \caption{Porównanie wybranych wyników optymalnych oraz wyprodukowanych przez algorytm dla wybranych instancji z rozpatrywanej biblioteki}
 \end{table}
   Zgodnie z Twierdzeniem 17.8 \cite{Alg} wartości w kolumnie "Algorytm" nie powinny przekraczać dwukrotności algorytmu optymalnego. Na poniższym wykresie
   można zauważyć, iż faktycznie krzywa prezentująca wartości otrzymane przez algorytm znajduje się pomiędzy krzywą reprezentująca rozwiązanie optymalne oraz jego dwukrotność.
@@ -126,7 +131,7 @@
     \centering
     \caption{Wykres wartości funkcji celu względem wybranych instancji w celu polepszenia widoczności}
   \end{figure}
-  Na podstawie powyższego wnioskujemy, iż prezentowany algorytm jest dobrym algorytmem aproksymacyjnym.
+  Na podstawie powyższego wnioskujemy, iż prezentowany algorytm jako algorytm aproksymacyjny, spełnia swoje zadanie zgodnie z oczekiwaniami teoretycznymi.
 \chapter{Pełna tabela}
 \begin{longtable}{| c | c | c | c |}
   \hline

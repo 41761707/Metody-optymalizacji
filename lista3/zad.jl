@@ -61,7 +61,7 @@ function feasible_solution(lower_bound, upper_bound, jobs, machines, ps)
         model = Model(GLPK.Optimizer)
         set_silent(model)
         #Zbiór S_T z książki
-        S_T = Set([(i, j) for i in machines for j in jobs if ps[i, j] <= T])
+        S_T = Vector([(i, j) for i in machines for j in jobs if ps[i, j] <= T])
         #Sprawdzenie, czy prace zostały rozdysponowane między maszynami
         if(all(j -> any(p -> p[2] == j, S_T), jobs) == false )
             #println("NIE WSZYSTKIE PRACE W S_T")
@@ -183,7 +183,7 @@ function forced_pairs(v,e,len)
     return pairs   
 end
 
-# Standardowy DFS
+# Przeszukiwanie wgłąb grafu w celu eliminacji cyklu
 # @param node - wierzchołek startowy
 # @param e - zbiór krawędzi
 # @param pairs - zbiór par utworzonych w przebiegu funkcji
@@ -218,8 +218,8 @@ end
 # @return new_pairs - nowo utowrzone pary (maszyna, praca)
 function resolve_conflict(v,e,len)
     pairs = Vector{Tuple{Int, Int}}()
-    paired = Set()
-    visited = Set()
+    paired = Vector()
+    visited = Vector()
 
     for vertex in v
         pairs,paired,visited = dfs(vertex,e,pairs,paired,visited)
